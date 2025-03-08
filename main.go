@@ -10,10 +10,19 @@ import (
 
 var screenWidth int32 = c.VIRTUAL_WIDTH
 var screenHeight int32 = c.VIRTUAL_HEIGHT
+var camera rl.Camera3D
 
 func main() {
 	rl.InitWindow(screenWidth, screenHeight, "Random Stuff")
 	defer rl.CloseWindow()
+
+	camera = rl.Camera3D{
+		Position:   rl.Vector3{X: 120, Y: 50, Z: 120},
+		Target:     rl.Vector3{X: 0, Y: 0, Z: 0},
+		Up:         rl.Vector3{X: 0, Y: 1, Z: 0},
+		Fovy:       45,
+		Projection: rl.CameraPerspective,
+	}
 
 	rl.SetWindowState(rl.FlagWindowResizable)
 	rl.SetTargetFPS(60)
@@ -24,15 +33,28 @@ func main() {
 		stuff.Update()
 
 		rl.BeginDrawing()
-		camera := scaleContentsToWindow()
-		rl.BeginMode2D(camera)
+		// draw2D()
+		draw3D()
 
-		rl.ClearBackground(rl.Black)
-		stuff.Draw()
-
-		rl.EndMode2D()
 		rl.EndDrawing()
 	}
+}
+
+func draw2D() {
+	camera := scaleContentsToWindow()
+	rl.BeginMode2D(camera)
+
+	rl.ClearBackground(rl.Black)
+	stuff.Draw()
+
+	rl.EndMode2D()
+}
+
+func draw3D() {
+	rl.BeginMode3D(camera)
+	rl.ClearBackground(rl.Black)
+	stuff.Draw()
+	rl.EndMode3D()
 }
 
 func scaleContentsToWindow() rl.Camera2D {

@@ -6,18 +6,27 @@ var tiles []bool = make([]bool, c.COLS*c.ROWS)
 
 func Init() {
 	// ConwayInit()
-	RandomWalkInit()
+	// RandomWalkInit()
 	// NormalDistInit()
+	// PerlinInit()
+	// PerlinNoise2DInit()
+	PerlinNoise3DInit()
 }
 
 func Draw() {
 	// ConwayDraw()
-	RandomWalkDraw()
+	// RandomWalkDraw()
 	// NormalDistDraw()
+	// PerlinDraw()
+	// PerlinNoise2DDraw()
+	PerlinNoise3DDraw()
 }
 
 func Update() {
 	// ConwayUpdate()
-	RandomWalkUpdate()
+	// RandomWalkUpdate()
 	// NormalDistUpdate()
+	// PerlinWalkUpdate()
+	// PerlinNoise2DUpdate()
+	PerlinNoise3DUpdate()
 }
